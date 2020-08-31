@@ -1,0 +1,14 @@
+
+# 在心跳之后节点消失，zk是cp创建的临时节点
+
+server:
+  port: 8004
+
+spring:
+  application:
+    name: payment-provider
+
+  cloud:
+    zookeeper:
+      # 集群以逗号分隔
+      connect-string: localhost:2181

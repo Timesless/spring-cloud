@@ -1,0 +1,99 @@
+
+// 只作用于greadle构建
+buildscript {
+    subprojects {
+        gradle.projectsEvaluated {
+            subprojects {
+                jar {
+                    enabled = true
+                }
+            }
+        }
+    }
+}
+
+// 插件
+plugins {
+    id 'org.springframework.boot' version '2.3.2.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+}
+
+bootJar {
+    enabled = false
+}
+
+// 作用于所有模块
+allprojects {
+
+    repositories {
+        mavenLocal();
+        mavenCentral();
+    }
+
+    group = 'com.yangzl'
+    version = '1.0-SNAPSHOT'
+
+    apply plugin: 'java'
+    // spring 插件
+    apply plugin: 'org.springframework.boot'
+    // spring依赖管理
+    apply plugin: 'io.spring.dependency-management'
+
+}
+
+// 作用于子模块
+subprojects {
+    // 声明变量
+    ext {
+        set('springCloudVersion', "Hoxton.SR6")
+    }
+
+    // 所有子模块都打包为springboot jar
+    bootJar {
+        enabled = true
+    }
+
+    sourceCompatibility = '1.8'
+
+    // lombook需要可插拔式注解处理器
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    // 所有子模块都有这些依赖
+    dependencies {
+
+        /**
+         * implementation： 依赖不会传递
+         * compile：依赖会传递
+         */
+        implementation 'org.springframework.cloud:spring-cloud-starter'
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        compileOnly 'org.projectlombok:lombok'
+        developmentOnly 'org.springframework.boot:spring-boot-devtools'
+        annotationProcessor 'org.projectlombok:lombok'
+        testImplementation('org.springframework.boot:spring-boot-starter-test') {
+            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        }
+    }
+
+    dependencyManagement {
+        imports {
+            // 注意，模板字符串只能用“”
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}
+
+
+
+
+

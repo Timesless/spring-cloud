@@ -1,0 +1,26 @@
+server:
+  port: 7001
+
+spring:
+  application:
+    name: eureka-server7001
+
+
+eureka:
+  # 服务端实例名称
+  instance:
+    hostname: eureka7001
+
+  # 自我保护模式（ap）关闭
+  server:
+    # enable-self-preservation: false
+    # eviction-interval-timer-in-ms: 4500
+
+  client:
+    # 当前应用是否注册
+    register-with-eureka: false
+    # 是否获取服务注册信息
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:7002/eureka
+

@@ -1,14 +1,15 @@
 rootProject.name = 'spring-cloud'
+
 include 'api-common'
+include 'eureka-servers'
+
+include 'provider-payment-hystrix8001'
+include 'provider-payment80018002'
+include 'provider-payment-zk8004'
+include 'provider-payment-consul8006'
+
 include 'consumer-order80'
-include 'provider-payment8001'
-include 'provider-payment8002'
-include 'eureka-server7001'
-include 'eureka-server7002'
-include 'provider-zk-payment8004'
 include 'consumer-zk-order80'
-include 'provider-consul-payment8006'
 include 'consumer-consul-order80'
 include 'consumer-openfeign-order80'
-include 'provider-payment-hystrix8001'
 

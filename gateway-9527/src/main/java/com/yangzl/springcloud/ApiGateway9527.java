@@ -3,20 +3,20 @@ package com.yangzl.springcloud;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * @Author yangzl
- * @Date: 2020/8/23 15:45
+ * @Date: 2020/9/6 01:40
  * @Desc:
+ *
+ * Gateway如何执行：路由 断言 过滤
  */
 
-@EnableFeignClients
 @EnableEurekaClient
 @SpringBootApplication
-public class ServiceConsumerFeign80 {
+public class ApiGateway9527 {
 
     public static void main(String[] args) {
-        SpringApplication.run(ServiceConsumerFeign80.class, args);
+        SpringApplication.run(ApiGateway9527.class, args);
     }
 }

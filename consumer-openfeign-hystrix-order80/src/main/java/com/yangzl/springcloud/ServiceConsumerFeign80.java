@@ -2,20 +2,23 @@ package com.yangzl.springcloud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * @Author yangzl
- * @Date: 2020/8/30 20:55
+ * @Date: 2020/8/23 15:45
  * @Desc:
  */
+
+@EnableHystrix
+@EnableFeignClients
 @EnableEurekaClient
-@EnableCircuitBreaker
 @SpringBootApplication
-public class ServiceProviderHystrix8001 {
+public class ServiceConsumerFeign80 {
 
     public static void main(String[] args) {
-        SpringApplication.run(ServiceProviderHystrix8001.class, args);
+        SpringApplication.run(ServiceConsumerFeign80.class, args);
     }
 }

@@ -16,9 +16,15 @@ eureka:
 
 # 设置客户端调用超时时间
 ribbon:
-  ReadTimeout: 3000
+  ReadTimeout: 1000
+
 
 # spring日志配置，默认以console，debug级别打印日志
 logging:
   level:
     com.yangzl.spirngcloud.service.**: debug
+
+
+feign:
+  hystrix:
+    enabled: true

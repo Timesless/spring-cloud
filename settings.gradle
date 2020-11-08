@@ -11,5 +11,11 @@ include 'provider-payment-consul8006'
 include 'consumer-order80'
 include 'consumer-zk-order80'
 include 'consumer-consul-order80'
-include 'consumer-openfeign-order80'
+include 'consumer-openfeign-hystrix-order80'
+include 'consumer-hystrix-dashboard9001'
+include 'gateway-9527'
+include 'cloud-config'
+
+
+include 'cloud-alibaba-payment90019002'
 

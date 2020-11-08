@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 /**
  * @Author yangzl
  * @Date: 2020/8/23 15:47
- * @Desc: 自带ribbon负载均衡
+ * @Desc: 自带ribbon负载均衡，添加Hystrix服务降级
  * 1. Ribbon + RestTemplate
  * 2. OpenFeign
  */
 
 @Component
-@FeignClient("PAYMENT-PROVIDER")
+@FeignClient(value = "PAYMENT-PROVIDER", fallback = PaymentFeignFallbackService.class)
 public interface PaymentFeignService {
 
     /**
@@ -29,4 +29,12 @@ public interface PaymentFeignService {
 
     @GetMapping(path = "/payment/feign/timeout")
     String feignTimeout();
+
+    // =========================================
+
+    @GetMapping("/hystrix/ok")
+    String hystrixOk();
+
+    @GetMapping("/hystrix/timeout")
+    String hystrixTimeout();
 }

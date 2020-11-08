@@ -1,0 +1,32 @@
+
+
+spring:
+  application:
+    name: cloud-alibaba-nacos
+
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+
+      # nacos 分布式配置中心, 替代Spring Cloud Config + Spring Cloud Bus组合
+      # 文件名固定格式, ${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+      # 当前文件名为: cloud-alibaba-nacos-dev.yaml, 即在nacos配置中新建此文件
+      config:
+        file-extension: yaml
+
+
+management:
+
+  # 可单独配置每个endpoint
+  endpoint:
+    health:
+      show-details: always
+
+  # jmx默认全部开启, web默认开启health,info端点
+  endpoints:
+    web:
+      exposure:
+        include: beans,conditions,loggers,health,info
+    jmx:
+      exposure:
+        include: beans,conditions,loggers,health,info

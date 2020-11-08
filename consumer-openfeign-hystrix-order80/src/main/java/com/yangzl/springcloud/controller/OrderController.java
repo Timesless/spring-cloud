@@ -19,28 +19,40 @@ import javax.annotation.Resource;
 
 @Slf4j
 @RestController
-@RequestMapping("consumer/openfeign")
+@RequestMapping("consumer")
 public class OrderController {
 
     @Resource
     private PaymentFeignService paymentFeignService;
 
-    @GetMapping("/{id}")
+    @GetMapping("openfeign/{id}")
     public CommonResult<Payment> getPaymentById(@PathVariable("id") String id) {
         return paymentFeignService.getPayment(Long.parseLong(id));
     }
-
-
     /**
      * 2020/8/30 测试feign超时
      * openfeign 默认等待1s，如果有长业务那么需配置ribbon ReadTimeout
-     * 404是因为8002无该接口
      * @param
      * @return
      */
-    @GetMapping("timeout")
+    @GetMapping("openfeign/timeout")
     public String feignTimeout() {
         return paymentFeignService.feignTimeout();
+    }
+
+
+    // ===============================================================
+    // 测试Hystrix服务降级
+    // 可以同服务端一样的配置，写handleMethod。但代码耦合度较高
+    // ===============================================================
+    @GetMapping("hystrix/ok")
+    public String hystrixOk() {
+        return paymentFeignService.hystrixOk();
+    }
+
+    @GetMapping("hystrix/timeout")
+    public String hystrixTimeout() {
+        return paymentFeignService.hystrixTimeout();
     }
 
 }
